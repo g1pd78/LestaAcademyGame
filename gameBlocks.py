@@ -43,6 +43,7 @@ class Block(pygame.sprite.Sprite):
 		currentSprites.remove(self.border)
 
 
+	# лучше было бы сделать обработку вне класса блок 0_о
 	def update(self, key, GameList, GameField = None):
 		if key == 'DOWN':
 			if self.gameFieldY + 1 < 5:
@@ -69,10 +70,13 @@ class Block(pygame.sprite.Sprite):
 			if self is not MovableBlock:
 				self.gonnaBeMoved = True
 				if MovingBlock:
-					if ((abs(MovableBlock.gameFieldY - self.gameFieldY) <= 1 and abs(MovableBlock.gameFieldY - self.gameFieldY) == 0)\
-					or (abs(MovableBlock.gameFieldX - self.gameFieldX) == 0 and abs(MovableBlock.gameFieldY - self.gameFieldY) <= 1))\
-					and GameField[self.gameFieldY][self.gameFieldX] == 'FREE_SPACE' and \
-					 GameField[MovableBlock.gameFieldY][MovableBlock.gameFieldX] in ['GREEN', 'BLUE', 'ORANGE']:
+					if ((abs(MovableBlock.gameFieldX - self.gameFieldX) <= 1  and\
+					 	abs(MovableBlock.gameFieldY - self.gameFieldY) == 0)   or\
+					 	(abs(MovableBlock.gameFieldX - self.gameFieldX) == 0  and\
+					 	abs(MovableBlock.gameFieldY - self.gameFieldY) <= 1)) and\
+					 	GameField[self.gameFieldY][self.gameFieldX] == 'FREE_SPACE' and \
+					 	GameField[MovableBlock.gameFieldY][MovableBlock.gameFieldX] in ['GREEN', 'BLUE', 'ORANGE']:
+
 						self.swapBlocks(MovableBlock, GameField)
 						MovingBlock = False
 						self.addBorder('SELECTED', self.gameFieldX, self.gameFieldY)

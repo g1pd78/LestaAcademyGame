@@ -64,7 +64,7 @@ while running:
 	for i in gameRulesMessage.split('\n'):
 		k+=1
 		text_surface = my_font.render(i, False, TEXT)
-		screen.blit(text_surface, (0, k * 30 + 450))
+		screen.blit(text_surface, (0, k * 30 + 400))
 	pygame.display.flip()
 
 if not running:
@@ -72,5 +72,6 @@ if not running:
 	screen.blit(text_surface, (0, 450))
 	pygame.display.flip()
 	time.sleep(2)
+
 #todo: правила слева выписать
 #чуть изменить гейм овер

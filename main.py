@@ -12,6 +12,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 
+my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
 field = fieldClass.Field
 field.generateField(field)
@@ -59,12 +60,17 @@ while running:
 	running = not field.checkForWinCondition(field)
 	screen.fill(BACKGROUND)
 	all_sprites.draw(screen)
+	k = 0
+	for i in gameRulesMessage.split('\n'):
+		k+=1
+		text_surface = my_font.render(i, False, TEXT)
+		screen.blit(text_surface, (0, k * 20 + 450))
 	pygame.display.flip()
 
-my_font = pygame.font.SysFont('Comic Sans MS', 30)
-text_surface = my_font.render('Game Over!', False, (0, 0, 0))
-screen.blit(text_surface, (0,0))
+text_surface = my_font.render(gameOverMessage, False, TEXT)
+screen.blit(text_surface, (0, 450))
 pygame.display.flip()
 
 time.sleep(2)
 #todo: правила слева выписать
+#чуть изменить гейм овер
